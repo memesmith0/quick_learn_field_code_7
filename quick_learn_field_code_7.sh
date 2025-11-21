@@ -195,11 +195,6 @@ for( line_index = 1 ; split_line[ line_index ] ; memory[ "call_stack" "call_stac
 
     }
 
-    else if( operator == "char_to_int" ){
-
-	memory[ operand_a ] = ord( memory[ operand_b ] ) ;
-
-    }
 
     else if( operator == "substring" ){
 
