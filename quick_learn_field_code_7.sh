@@ -200,4 +200,4 @@ for( line_index = 1 ; line[ line_index ] ; memory[ "call_stack" "call_stack_inde
     }
     
 }
-';
+' ;
