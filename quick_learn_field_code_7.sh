@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env awk
 #john morris beck 2025 - gplv2 - see gnu.org for license - https://github.com/memesmith0 - https://thefastscrolls.neocities.org
 #qlfc7.sh
 #quick_learn_field_code_7
@@ -56,53 +56,37 @@
 
 #and of course i have to test it myself and decide "is this easy." "is this worth using over python." is surely
 #hope so for the sake of my own schedule for the next few months/years.
-
-qlfl7(){
-awk '
-function n(){
-while(xsi){
-if(r[xs[xsi] xi]){return r[xs[xsi] xi[xsi]++]}
-xs[xsi]=0;
-xi[xsi--]=0;
+function next_operation_code(){
+while(callindex){
+if(memory["call_stack" memory["call_stack" "call_stack_index"] memory["call_stack" "subroutine_index"]){return memory["call_stack" memory["call_stack" "call_stack_index"]++ memory["call_stack" "subroutine_index"]]}
+memory["call_stack" "call_stack_index"]=0;
+memory["call_stack" memory["call_stack" "call_stack_index"]-- memory["call_stack" "subroutine_index"]]=0;
 }
-xsi++;
-split(getline(),g," ");
-for(i=1;g[i];r[xs[xsi] i]=g[i++]){};
-}
-function mach(x,y,z,m){
-if(z == "+"){r[x]+=r[y]}
-if(z == "-"){r[x]-=r[y]}
-if(z == "*"){r[x]*=r[y]}
-if(z == "/"){r[x]/=r[y]}
-if(z == "%"){r[x]%=r[y]}
-if(z == "|"){r[x]|=r[y]}
-else if(z == "<"){r[x]=r[x]<r[y]}
-else if(z == "m"){r[y]=r[x]}
-else if(z == "b"){r[y]=x}#this might not implement proper strings
-else if(z == "$"){r[x]=system(r[y])}
-else if(z == "r"){r[x]=r[r[y]]}
-else if(z == "w"){r[r[y]] = r[x]}
-else if(z == "i"){getline r[x]}
-else if(z == "o"){printf "%s", r[x]}
-else if(z == "cat"){r[x]=r[x] r[y]}
-else if(z == "c"){r[x]=sprintf("%c", r[y])}
-else if(z == "#"){r[x]=ord(r[y])}
-else if(z == ":"){r[r[x] r[r[x] r[y]]++]=r[m]}
-else if(z == "s"){r[x]=substr(r[x],r[y],r[m])}
-else if(z == "k"){exit}
-else if(z == "push"){r["s" ++r[si]]=n();}
-else if(z == "pop"){r[y]=r["s" r[si]--]}
-else if(z == "newline"){"\n"}
-else if(z == "tab"){r[y]="\t"}
-else if(z == "space"){r[y]=" "}
-else if(z == "x"){xs[xsi++]=r[x]}
-else if(z == "define"){dict[r[x]]=r[y]}
-else if(z == "forth"){forth=1;while(forth){mach("x",r[x],"","");word=n();if(dict[z]){mach(word,"","","")}else{mach("push",word,"",""}}}
-else{if(dict[z]){xs[++xsi]=z}
-}
-{
-x=n();y=n();z=n();m=n();
-mach(x,y,z,m);
-}';
-}
-qlfc7;
+memory["call_stack" "call_stack_index"]++;
+getline line;
+split(line,line," ");
+for(line_index=1;line[line_index];memory["call_stack" "call_stack_index" line_index]=line[line_index++]){}}
+{operand_a=next_operation_code();
+operan_b=next_operation_code();
+operand_c=next_operation_code();
+operator=next_operation_code();
+if(operator=="add"){memory[operand_a]=memory[operand_b]+memory[operand_c]}
+else if(operator=="sub"){memory[operand_a]=memory[operand_b]-memory[operand_c]}
+else if(operator=="mult"){memory[operand_a]=memory[operand_b]*memory[operand_c]}
+else if(operator=="div"){memory[operand_a] =int(memory[operand_a]/memory[operand_b])}
+else if(operator=="mod"){memory[operand_a]=memory[operand_b]%memory[operand_b]}
+else if(operator=="or"){memory[operand_a]=memory[operand_b]||memory[operand_c]}
+else if(operator=="less"){memory[operand_a]=memory[operand_b]<memory[operand_c]}
+else if(operator=="move"){memory[operand_a]=memory[operand_b]}
+else if(operator=="store"){memory[operand_a]=operand_b}
+else if(operator=="shell"){memory[operand_a]=system(memory[operand_b])}
+else if(operator=="get"){memory[operand_a]=memory[memory[operand_b]]}
+else if(operator=="set"){memory[memory[operand_a]]=memory[operand_b]}
+else if(operator=="read"){getline memory[operand_a]}
+else if(operator=="write"){printf "%s", memory[operand_a]}
+else if(operator=="append"){memory[operand_a]=memory[operand_b] memory[operand_c]}
+else if(operator=="int_to_char"){memory[operand_a]=sprintf("%c", memory[operand_b])}
+else if(operator=="char_to_int"){memory[operand_a]=ord(memory[operand_b])}
+else if(operator=="substring"){memory[operand_a]=substr(memory[operand_a],memory[operand_b],memory[operand_c])}
+else if(operator=="execute"){memory["call_stack" call_stack_index++]=memory[operand_a]}
+else{exit}}
