@@ -56,7 +56,9 @@
 
 #and of course i have to test it myself and decide "is this easy." "is this worth using over python." is surely
 #hope so for the sake of my own schedule for the next few months/years.
+
 awk '
+
 function next_operation_code( ){
     
 while( memory[ "call_stack" "call_stack_index" ] ){
