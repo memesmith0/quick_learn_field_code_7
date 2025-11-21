@@ -91,7 +91,7 @@ for( line_index = 1 ; line[ line_index ] ; memory[ "call_stack" "call_stack_inde
 
     operand_a = next_operation_code( ) ;
     
-    operan_b = next_operation_code( ) ;
+    operand_b = next_operation_code( ) ;
     
     operand_c = next_operation_code( ) ;
     
