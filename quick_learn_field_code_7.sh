@@ -66,7 +66,7 @@ if( memory[ "call_stack" memory[ "call_stack" "call_stack_index" ] memory[ "call
 	
     }
     
-memory["call_stack" "call_stack_index" ] = 0 ;
+memory[ "call_stack" "call_stack_index" ] = 0 ;
     
 memory[ "call_stack" memory[ "call_stack" "call_stack_index" ]-- memory[ "call_stack" "subroutine_index" ] ] = 0 ;
     
@@ -76,11 +76,16 @@ memory[ "call_stack" "call_stack_index" ]++ ;
 
 getline line ;
 
-split( line , line ," " ) ;
+split( line , line , " " ) ;
 
-for( line_index=1 ; line[ line_index ] ; memory[ "call_stack" "call_stack_index" line_index ] = line[ line_index++ ] ){ }
+for( line_index = 1 ; line[ line_index ] ; memory[ "call_stack" "call_stack_index" line_index ] = line[ line_index++ ] ){
+
+    
+    
+}
 
 }
+
 {
 
     operand_a = next_operation_code( ) ;
@@ -183,7 +188,7 @@ for( line_index=1 ; line[ line_index ] ; memory[ "call_stack" "call_stack_index"
     }
     else if( operator == "run" ){
 
-	memory["call_stack" memory["call_stack" "call_stack_index" ]++ ] = memory[ operand_a ] ;
+	memory[ "call_stack" memory[ "call_stack" "call_stack_index" ]++ ] = memory[ operand_a ] ;
 
     }
     
