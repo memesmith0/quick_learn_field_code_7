@@ -77,11 +77,11 @@ memory[ "call_stack" memory[ "call_stack" "call_stack_index" ]-- memory[ "call_s
     
 memory[ "call_stack" "call_stack_index" ]++ ;
 
-getline line ;
+getline input_line ;
 
-split( line , line , " " ) ;
+split( inptut_line , split_line , " " ) ;
 
-for( line_index = 1 ; line[ line_index ] ; memory[ "call_stack" "call_stack_index" line_index ] = line[ line_index++ ] ){
+for( line_index = 1 ; split_line[ line_index ] ; memory[ "call_stack" "call_stack_index" line_index ] = split_line[ line_index++ ] ){
 
     
     
