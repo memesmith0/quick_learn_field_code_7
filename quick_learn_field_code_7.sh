@@ -63,7 +63,7 @@ function next_operation_code( ){
     
 while( memory[ "call_stack" "call_stack_index" ] ){
     
-if( memory[ "call_stack" memory[ "call_stack" "call_stack_index" ] memory[ "call_stack" "subroutine_index" ] ){
+if( memory[ "call_stack" memory[ "call_stack" "call_stack_index" ] memory[ "call_stack" "subroutine_index" ] ] ){
 	
 	return memory[ "call_stack" memory[ "call_stack" "call_stack_index" ]++ memory[ "call_stack" "subroutine_index" ] ] ;
 	
