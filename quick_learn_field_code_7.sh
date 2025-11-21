@@ -65,19 +65,23 @@ while(1){
     
     while( memory[ "call_stack_index" ] ){
 
+
             
-	    if(memory["call_stack" memory["call_stack_index"] memory["call_stack" memory["call_stack_index"] "subroutine_index"]]){
-    	
+	    if( memory[ "call_stack" memory[ "call_stack_index" ] memory[ "call_stack" memory[ "call_stack_index" ]  "subroutine_index"] ] ){
+
 		return memory["call_stack" memory[ "call_stack_index" ] memory[ "call_stack" memory[ "call_stack_index" ] "subroutine_index" ]++ ] ;
 	
 	    }
 
 
-		memory[ "call_stack" memory[ "call_stack_index" ] "subroutine_index" ] = 0 ;
+		for(;memory[ "call_stack" memory[ "call_stack_index" ] "subroutine_index" ];memory[ "call_stack" memory[ "call_stack_index" ] "subroutine_index" ]--){
+ 		   memory[ "call_stack" memory[ "call_stack_index" ] memory["call_stack" memory["call_stack_index"] "subroutine_index"]] = "";
+		   }
+		   memory[ "call_stack_index" ]--;
 
-		memory[ "call_stack_index" ]-- ;
 
         }
+
     
     memory[ "call_stack_index" ]++ ;
 
@@ -94,7 +98,6 @@ while(1){
     }
 
 }
-
 BEGIN{
 
 while(1){
@@ -106,6 +109,9 @@ while(1){
     operand_c = next_operation_code( ) ;
     
     operator = next_operation_code( ) ;
+
+
+#     printf "DEBUG: op=%s a=%s b=%s c=%s\n", operator, operand_a, operand_b, operand_c > "/dev/stderr";
     
     if( operator == "add" ){
 	
@@ -149,11 +155,6 @@ while(1){
 
     }
 
-    else if( operator == "move" ){
-
-	memory[ operand_a ] = memory[ operand_b ] ;
-
-    }
 
     else if( operator == "store" ){
 
@@ -169,13 +170,13 @@ while(1){
 
     else if( operator == "get" ){
 
-	memory[ operand_a ] = memory[memory[ operand_b ]] ;
+	memory[ operand_a ] = memory[memory[ operand_b ] ] ;
 
     }
 
     else if( operator == "set" ){
 
-	memory[memory[ operand_a ] ] = memory[ operand_b ] ;
+	memory[operand_a] = memory[operand_b] ;
 
     }
 
@@ -184,12 +185,10 @@ while(1){
 	getline memory[ operand_a ] ;
 
     }
-
-    else if( operator == "write" ){
-
-	printf "%s", memory[ operand_a ] ;
-
-    }
+else if( operator == "write" ){
+#    printf "DEBUG: writing '%s' from memory['%s']\n", memory[operand_a], operand_a;
+    printf "%s", memory[ operand_a ] ;
+}
 
     else if( operator == "append" ){
 
@@ -209,6 +208,43 @@ while(1){
 	memory[ operand_a ] = substr( memory[ operand_a ] , memory[ operand_b ] , memory[ operand_c ] ) ;
 
     }
+
+    else if( operator == "define" ){
+    	 operand_a="";
+    	 operand_b="";
+	 idx=1;
+    	 while(operand_a != "define"){
+
+    	 operand_a=next_operation_code();
+
+	 memory[ "dictionary" memory[ "dictionary_name" ] idx++ ] = operand_a ;	
+
+	 }
+	 memory[ "dictionary_name" ];
+	 operand_a = "" ;
+	 operand_b= "" ;
+
+
+    }
+
+    else if( operator == "run" ){
+    	 memory[ "call_stack_index" ]++;
+	 for( line_index = 1 ; memory[ "dictionary" operand_a line_index ] ; memory[ "call_stack" memory[ "call_stack_index" ] line_index ] = memory[ "dictionary" operand_a line_index++ ] ){
+    
+    }
+	 memory[ "call_stack" memory[ "call_stack_index" ] "subroutine_index"]++ ;
+
+
+	 }
+
+
+ 
+	 
+
+
+
+
+
 
     else{
 
