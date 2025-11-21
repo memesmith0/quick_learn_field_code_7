@@ -71,7 +71,6 @@ if(z == "*"){r[x]*=r[y]}
 if(z == "/"){r[x]/=r[y]}
 if(z == "%"){r[x]%=r[y]}
 if(z == "|"){r[x]|=r[y]}
-if(z == "&"){r[x]&=r[y]}
 if(z == "!"){r[x]=!r[x]}
 else if(z == "<"){r[x]=r[x]<r[y]}
 else if(z == "="){r[x]=r[x]==r[y]}
@@ -93,6 +92,8 @@ else if(z == "newline"){"\n"}
 else if(z == "tab"){r[y]="\t"}
 else if(z == "space"){r[y]=" "}
 else if(z == "x"){split(r[x],x,"\n");xi=0;}
+else if(z == "define"){dict[r[x]]=r[y]}
+else{if(dict[z]){split(dict[z],x," ")}}
 		    }';
 }
 qlfc7;
