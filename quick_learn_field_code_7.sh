@@ -60,16 +60,14 @@
 qlfl7(){
 awk '
 function n(){
-if(x[xi]){return x[xi++]}
 while(xsi){
+if(r[xs[xsi] xi]){return r[xs[xsi] xi[xsi]++]}
 xs[xsi]=0;
-xsis[xsi--]=0;
-if(xsis[xsi]){
-split(xs[xsi],x," ");xi=xsis[xsi++];
+xi[xsi--]=0;
 }
-if(x[xi]){return x[xi++]}
-}
-split(getline(),x," ");xi=0;
+xsi++;
+split(getline(),g," ");
+for(i=1;g[i];r[xs[xsi] i]=g[i++]){};
 }
 function mach(x,y,z,m){
 if(z == "+"){r[x]+=r[y]}
@@ -78,34 +76,33 @@ if(z == "*"){r[x]*=r[y]}
 if(z == "/"){r[x]/=r[y]}
 if(z == "%"){r[x]%=r[y]}
 if(z == "|"){r[x]|=r[y]}
-if(z == "!"){r[x]=!r[x]}
 else if(z == "<"){r[x]=r[x]<r[y]}
-else if(z == "="){r[x]=r[x]==r[y]}
 else if(z == "m"){r[y]=r[x]}
 else if(z == "b"){r[y]=x}#this might not implement proper strings
 else if(z == "$"){r[x]=system(r[y])}
-else if(z == "r"){r[m,x]=r[r[y]]}
-else if(z == "w"){r[m,r[y]] = r[x]}
+else if(z == "r"){r[x]=r[r[y]]}
+else if(z == "w"){r[r[y]] = r[x]}
 else if(z == "i"){getline r[x]}
 else if(z == "o"){printf "%s", r[x]}
 else if(z == "cat"){r[x]=r[x] r[y]}
 else if(z == "c"){r[x]=sprintf("%c", r[y])}
 else if(z == "#"){r[x]=ord(r[y])}
-else if(z == "s"){r[x]=substr(r[x],r[y],m)}
-else if(z == "k"){if(forth==1){forth=0}else{exit}}
-else if(z == "push"){s[++si]=n();}
-else if(z == "pop"){r[y]=s[si--]}
+else if(z == ":"){r[r[x] r[r[x] r[y]]++]=r[m]}
+else if(z == "s"){r[x]=substr(r[x],r[y],r[m])}
+else if(z == "k"){exit}
+else if(z == "push"){r["s" ++r[si]]=n();}
+else if(z == "pop"){r[y]=r["s" r[si]--]}
 else if(z == "newline"){"\n"}
 else if(z == "tab"){r[y]="\t"}
 else if(z == "space"){r[y]=" "}
-else if(z == "x"){xs[++xsi]=r[x];split(r[x],x," ");xi=0;}
+else if(z == "x"){xs[xsi++]=r[x]}
 else if(z == "define"){dict[r[x]]=r[y]}
-else if(z == "forth"){forth=1;while(forth){mach("x",r[x],"","");word=n();if(dict[z]){mach(word,"","","")}else{mach("push",word,"",""};}}
-else{if(dict[z]){xs[++xsi]=dict[z];split(dict[z],x," ");xi=0;}
+else if(z == "forth"){forth=1;while(forth){mach("x",r[x],"","");word=n();if(dict[z]){mach(word,"","","")}else{mach("push",word,"",""}}}
+else{if(dict[z]){xs[++xsi]=z}
 }
 {
-x=n();y=n();z=n();
-mach(x,y,z);
+x=n();y=n();z=n();m=n();
+mach(x,y,z,m);
 }';
 }
 qlfc7;
