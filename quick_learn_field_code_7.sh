@@ -60,36 +60,44 @@
 awk '
 
 function next_operation_code( ){
+
+while(1){
     
-while( memory[ "call_stack" "call_stack_index" ] ){
+    while( memory[ "call_stack_index" ] ){
+
+            
+	    if(memory["call_stack" memory["call_stack_index"] memory["call_stack" memory["call_stack_index"] "subroutine_index"]]){
+    	
+		return memory["call_stack" memory[ "call_stack_index" ] memory[ "call_stack" memory[ "call_stack_index" ] "subroutine_index" ]++ ] ;
+	
+	    }
+
+
+		memory[ "call_stack" memory[ "call_stack_index" ] "subroutine_index" ] = 0 ;
+
+		memory[ "call_stack_index" ]-- ;
+
+        }
     
-if( memory[ "call_stack" memory[ "call_stack" "call_stack_index" ] memory[ "call_stack" "subroutine_index" ] ] ){
-	
-	return memory[ "call_stack" memory[ "call_stack" "call_stack_index" ]++ memory[ "call_stack" "subroutine_index" ] ] ;
-	
+    memory[ "call_stack_index" ]++ ;
+
+    getline input_line ;
+
+    split( input_line , split_line , " " ) ;
+
+    for( line_index = 1 ; split_line[ line_index ] ; memory[ "call_stack" memory[ "call_stack_index" ] line_index ] = split_line[ line_index++ ] ){
+    
     }
-    
-memory[ "call_stack" "call_stack_index" ] = 0 ;
-    
-memory[ "call_stack" memory[ "call_stack" "call_stack_index" ]-- memory[ "call_stack" "subroutine_index" ] ] = 0 ;
-    
-}
-    
-memory[ "call_stack" "call_stack_index" ]++ ;
 
-getline input_line ;
+    memory[ "call_stack" memory[ "call_stack_index" ] "subroutine_index" ]++; 
 
-split( inptut_line , split_line , " " ) ;
-
-for( line_index = 1 ; split_line[ line_index ] ; memory[ "call_stack" "call_stack_index" line_index ] = split_line[ line_index++ ] ){
-
-    
-    
-}
+    }
 
 }
 
-{
+BEGIN{
+
+while(1){
 
     operand_a = next_operation_code( ) ;
     
@@ -204,9 +212,11 @@ for( line_index = 1 ; split_line[ line_index ] ; memory[ "call_stack" "call_stac
 
     else{
 
-	exit;
+    	 exit;
 
     }
+
+}
     
 }
 
