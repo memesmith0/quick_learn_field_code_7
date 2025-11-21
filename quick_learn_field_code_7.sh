@@ -88,5 +88,5 @@ else if(operator=="append"){memory[operand_a]=memory[operand_b] memory[operand_c
 else if(operator=="int_to_char"){memory[operand_a]=sprintf("%c", memory[operand_b])}
 else if(operator=="char_to_int"){memory[operand_a]=ord(memory[operand_b])}
 else if(operator=="substring"){memory[operand_a]=substr(memory[operand_a],memory[operand_b],memory[operand_c])}
-else if(operator=="execute"){memory["call_stack" call_stack_index++]=memory[operand_a]}
+else if(operator=="execute"){memory["call_stack" memory["call_stack" "call_stack_index"]++]=memory[operand_a]}
 else{exit}}
