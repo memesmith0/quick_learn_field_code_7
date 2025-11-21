@@ -184,7 +184,7 @@ for( line_index = 1 ; line[ line_index ] ; memory[ "call_stack" "call_stack_inde
     }
     else if( operator == "substring" ){
 
-	memory[ operand_a ] = substr( memory[ operand_a ],memory[ operand_b ],memory[ operand_c ] ) ;
+	memory[ operand_a ] = substr( memory[ operand_a ] , memory[ operand_b ] , memory[ operand_c ] ) ;
 
     }
     else if( operator == "run" ){
