@@ -102,97 +102,109 @@ for( line_index = 1 ; line[ line_index ] ; memory[ "call_stack" "call_stack_inde
 	memory[ operand_a ] = memory[ operand_b ] + memory[ operand_c ] ;
 	
     }
+
     else if(operator== "sub" ){
 	
 	memory[ operand_a ] = memory[ operand_b ] - memory[ operand_c ] ;
 
     }
+
     else if( operator == "mult" ){
     
     memory[ operand_a ] = memory[ operand_b ] * memory[ operand_c ] ;
 
     }
+
     else if( operator == "div" ){
 
 	memory[ operand_a ] = int( memory[ operand_b ] / memory[ operand_c ] ) ;
 
     }
+
     else if( operator == "mod" ){
 
 	memory[ operand_a ] = memory[ operand_b ] % memory[ operand_c ] ;
 
     }
+
     else if( operator == "or" ){
 
 	memory[ operand_a ] = memory[ operand_b ] || memory[ operand_c ] ;
 
     }
+
     else if( operator == "less" ){
 
 	memory[ operand_a ] = memory[ operand_b ] < memory[ operand_c ] ;
 
     }
+
     else if( operator == "move" ){
 
 	memory[ operand_a ] = memory[ operand_b ] ;
 
     }
+
     else if( operator == "store" ){
 
 	memory[ operand_a ] = operand_b;
 
     }
+
     else if( operator == "shell" ){
 
 	memory[ operand_a ] = system( memory[ operand_b ] ) ;
 
     }
+
     else if( operator == "get" ){
 
 	memory[ operand_a ] = memory[memory[ operand_b ]] ;
 
     }
+
     else if( operator == "set" ){
 
 	memory[memory[ operand_a ] ] = memory[ operand_b ] ;
 
     }
+
     else if( operator == "read" ){
 	
 	getline memory[ operand_a ] ;
 
     }
+
     else if( operator == "write" ){
 
 	printf "%s", memory[ operand_a ] ;
 
     }
+
     else if( operator == "append" ){
 
 	memory[ operand_a ] = memory[ operand_b ] memory[ operand_c ] ;
 
     }
+
     else if( operator == "int_to_char" ){
 
 	memory[ operand_a ] = sprintf( "%c" , memory[ operand_b ] ) ;
 
     }
+
     else if( operator == "char_to_int" ){
 
 	memory[ operand_a ] = ord( memory[ operand_b ] ) ;
 
     }
+
     else if( operator == "substring" ){
 
 	memory[ operand_a ] = substr( memory[ operand_a ] , memory[ operand_b ] , memory[ operand_c ] ) ;
 
     }
-    else if( operator == "run" ){
 
-	memory[ "call_stack" memory[ "call_stack" "call_stack_index" ]++ ] = memory[ operand_a ] ;
-
-    }
-    
     else{
 
 	exit;
@@ -200,4 +212,5 @@ for( line_index = 1 ; line[ line_index ] ; memory[ "call_stack" "call_stack_inde
     }
     
 }
+
 ' ;
