@@ -250,7 +250,23 @@ while( operator != "exit" ){
 
     }
 
-    else if( operator ){
+
+      else if( operator == "(" ){
+
+      	   lisp_call_stack[ ++lisp_call_stack_index ] = next_operation_code( ) ;
+
+      }
+
+      else if( operator == ")" ){
+
+      	   call_stack[ call_stack_index++ "subroutine_index" ] = 1 ;
+
+	   call_stack[ call_stack_index ] = "defined_word" lisp_call_stack[ lisp_call_stack_index-- ] ;
+
+
+      }
+
+      else{
 
 
     	   if( memory[ "defined_word" operator ]){
@@ -272,20 +288,6 @@ while( operator != "exit" ){
 	 
       }
 
-      else if( operator == "(" ){
-
-      	   lisp_call_stack[ ++lisp_call_stack_index ] = next_operation_code( ) ;
-
-      }
-
-      else if( operator == ")" ){
-
-      	   call_stack[ call_stack_index++ "subroutine_index" ] = 1 ;
-
-	   call_stack[ call_stack_index ] = "defined_word" lisp_call_stack[ lisp_call_stack_index-- ] ;
-
-
-      }
 
 
 
