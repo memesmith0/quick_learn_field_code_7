@@ -63,55 +63,42 @@ function next_operation_code( ){
 
 while(1){
     
-    while( memory[ "call_stack_index" ] ){
-
-
+    while( call_stack_index ] ){
             
-	    if( memory[ "call_stack" memory[ "call_stack_index" ] memory[ "call_stack" memory[ "call_stack_index" ]  "subroutine_index"] ] ){
+	    if( next_operation=call_stack[ call_stack_index call_stack[ call_stack_index "subroutine_index" ]++ ] ){
 
-		return memory["call_stack" memory[ "call_stack_index" ] memory[ "call_stack" memory[ "call_stack_index" ] "subroutine_index" ]++ ] ;
+		return next_operation ;
 	
 	    }
 
 
-		for(;memory[ "call_stack" memory[ "call_stack_index" ] "subroutine_index" ];memory[ "call_stack" memory[ "call_stack_index" ] "subroutine_index" ]--){
- 		   memory[ "call_stack" memory[ "call_stack_index" ] memory["call_stack" memory["call_stack_index"] "subroutine_index"]] = "";
+		while(call_stack[ call_stack_index --call_stack[ call_stack_index "subroutine_index" ] ]--){
+
 		   }
-		   memory[ "call_stack_index" ]--;
+
+		   call_stack_index--
 
 
         }
-
-    
-    memory[ "call_stack_index" ]++ ;
 
     getline input_line ;
 
     split( input_line , split_line , " " ) ;
 
-    for( line_index = 1 ; split_line[ line_index ] ; memory[ "call_stack" memory[ "call_stack_index" ] line_index ] = split_line[ line_index++ ] ){
+    call_stack_index++ ;
+
+    while( call_stack[ call_stack_index ++call_stack[ call_stack_index "subroutine_index" ] ]=split_line[ ++call_stack[ call_stack_index "subroutine_index" ]]){
     
     }
 
-    memory[ "call_stack" memory[ "call_stack_index" ] "subroutine_index" ]++; 
+    call_stack[ call_stack_index "subroutine_index" ]=1 ; 
 
     }
 
 }
 BEGIN{
 
-while(1){
-
-    operand_a = next_operation_code( ) ;
-    
-    operand_b = next_operation_code( ) ;
-    
-    operand_c = next_operation_code( ) ;
-    
-    operator = next_operation_code( ) ;
-
-
-#     printf "DEBUG: op=%s a=%s b=%s c=%s\n", operator, operand_a, operand_b, operand_c > "/dev/stderr";
+while( operator != "exit" ){
     
     if( operator == "add" ){
 	
@@ -185,10 +172,11 @@ while(1){
 	getline memory[ operand_a ] ;
 
     }
-else if( operator == "write" ){
-#    printf "DEBUG: writing '%s' from memory['%s']\n", memory[operand_a], operand_a;
-    printf "%s", memory[ operand_a ] ;
-}
+    else if( operator == "write" ){
+
+        printf "%s", memory[ operand_a ] ;
+
+	}
 
     else if( operator == "append" ){
 
@@ -210,47 +198,109 @@ else if( operator == "write" ){
     }
 
     else if( operator == "define" ){
-    	 operand_a="";
-    	 operand_b="";
-	 idx=1;
-    	 while(operand_a != "define"){
 
-    	 operand_a=next_operation_code();
+    	if( operand_b == "forth" ){
 
-	 memory[ "dictionary" memory[ "dictionary_name" ] idx++ ] = operand_a ;	
+        memory[ "defined_word_forth" operand_a ]++
+
+	}
+
+	else{
+	
+
+        memory[ "defined_word" operand_a ]++
+
+	}
+
+
+    	 while( ( memory[ "defined_word" operand_a ++operator ] = next_operation_code( ) ) != "define" ){
 
 	 }
-	 memory[ "dictionary_name" ];
-	 operand_a = "" ;
-	 operand_b= "" ;
 
 
     }
 
-    else if( operator == "run" ){
-    	 memory[ "call_stack_index" ]++;
-	 for( line_index = 1 ; memory[ "dictionary" operand_a line_index ] ; memory[ "call_stack" memory[ "call_stack_index" ] line_index ] = memory[ "dictionary" operand_a line_index++ ] ){
+
+    else if (operator == "push"){
+
+    	 forth_stack[ ++forth_stack_index ] = operation_a ;
+
+    }
+
+
+    else if (operator == "pop"){
+
+        memory[operator_a]=forth_stack[ forth_stack_index-- ]
+
+    }
+
+
+    else if( operator == "forth" ){
+
+    	 
+	 #a name of a list of words is in operator_a, does not care if it is forth or vm words
+	 #push operator_a onto the forth call stack
+	 forth_call_stack[++forth_call_stack_index]=operator_a;
+
+	 #while we still have things on the forth call stack
+
+	 while( operator_a = forth_call_stack[forth_call_stack_index forth_call_stabck[forth_call_stack_index]]
+
+	 #we walk through the list of words. if they are defined as forth words, push them onto the forth_call_stack
+	 #if they are not defined as forth words, they are vm functions, and are run
+
+	     forth_call_stack_index++ ;
+
+	         while( forth_call_stack[ forth_call_stack_index ++forth_call_stack[ forth_call_stack_index "subroutine_index" ] ]=split_line[ ++forth_call_stack[ forth_call_stack_index "subroutine_index" ]]){
     
     }
-	 memory[ "call_stack" memory[ "call_stack_index" ] "subroutine_index"]++ ;
 
-
-	 }
-
-
- 
-	 
+    forth_call_stack[ forth_call_stack_index "subroutine_index" ]=1 ; 
 
 
 
-
-
-
-    else{
-
-    	 exit;
 
     }
+
+    else if( operator ){
+
+    	 if( memory["defined_word_forth" operator] ){
+
+	         call_stack[ call_stack_index++ "subroutine_index"] = 1 ;
+		 call_stack[ call_stack_index ] = "defined_word" operator ;
+    
+            }
+
+    	 else if( memory["defined_word" operator] ){
+
+	         call_stack[ call_stack_index++ "subroutine_index"] = 1 ;
+		 call_stack[ call_stack_index ] = "defined_word" operator ;
+    
+            }
+
+
+	    else{
+
+	    	    forth_stack[ ++forth_stack_index ] = operator;
+
+		    }
+
+
+	    
+
+	 
+      }
+
+
+    operator = next_operation_code( ) ;
+
+    operand_a = next_operation_code( ) ;
+    
+    operand_b = next_operation_code( ) ;
+    
+    operand_c = next_operation_code( ) ;
+    
+
 
 }
     
