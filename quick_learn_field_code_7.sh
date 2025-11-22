@@ -199,19 +199,7 @@ while( operator != "exit" ){
 
     else if( operator == "define" ){
 
-    	if( operand_b == "forth" ){
-
-        memory[ "defined_word_forth" operand_a ]++
-
-	}
-
-	else{
-	
-
         memory[ "defined_word" operand_a ]++
-
-	}
-
 
     	 while( ( memory[ "defined_word" operand_a ++operator ] = next_operation_code( ) ) != "define" ){
 
@@ -264,20 +252,16 @@ while( operator != "exit" ){
 
     else if( operator ){
 
-    	 if( memory["defined_word_forth" operator] ){
 
-	         call_stack[ call_stack_index++ "subroutine_index"] = 1 ;
+    	   if( memory[ "defined_word" operator ]){
+
+
+	         call_stack[ ++call_stack_index "subroutine_index" ]++ ;
+
 		 call_stack[ call_stack_index ] = "defined_word" operator ;
+
+		 }
     
-            }
-
-    	 else if( memory["defined_word" operator] ){
-
-	         call_stack[ call_stack_index++ "subroutine_index"] = 1 ;
-		 call_stack[ call_stack_index ] = "defined_word" operator ;
-    
-            }
-
 
 	    else{
 
@@ -285,11 +269,24 @@ while( operator != "exit" ){
 
 		    }
 
-
-	    
-
 	 
       }
+
+      else if( operator == "(" ){
+
+      	   lisp_call_stack[ ++lisp_call_stack_index ] = next_operation_code( ) ;
+
+      }
+
+      else if( operator == ")" ){
+
+      	   call_stack[ call_stack_index++ "subroutine_index" ] = 1 ;
+
+	   call_stack[ call_stack_index ] = "defined_word" lisp_call_stack[ lisp_call_stack_index-- ] ;
+
+
+      }
+
 
 
     operator = next_operation_code( ) ;
