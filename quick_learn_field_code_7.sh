@@ -62,112 +62,103 @@ awk '
 function next_operation_code( ){
 
 while(1){
-
-	
     
     while( call_stack_index  ){
             
-	    if( next_operation=call_stack[ call_stack_index call_stack[ call_stack_index "subroutine_index" ]++ ] ){
+	    if( next_operation=memory[ call_stack[ call_stack_index ] call_stack[ call_stack_index "subroutine_index" ]++ ] ){
 
 		return next_operation ;
 	
 	    }
 
+	    call_stack[ call_stack_index call_stack[ call_stack_index "subroutine_index" ] = 0 ;
 
-		while(call_stack[ call_stack_index --call_stack[ call_stack_index "subroutine_index" ] ]--){
+	    call_stack[ call_stack_index-- ] = 0 ;
 
-		   }
-
-		   call_stack_index--
-
+	    current_namespace = memory[ call_stack[ call_stack_index ] ] ;
 
         }
+
+    erase_virtaul_machine_line_of_user_input_counte = 0 ;
+
+    while(memory["virtual_machine_line_of_user_input" erase_virtual_machine_line_of_user_input_counter++]--){
+
+    }
 
     getline input_line ;
 
     split( input_line , split_line , " " ) ;
 
-    call_stack_index++ ;
+    current_namespace = "virtual_machine" ;
 
-    while( call_stack[ call_stack_index ++call_stack[ call_stack_index "subroutine_index" ] ]=split_line[ ++call_stack[ call_stack_index "subroutine_index" ]]){
+    call_stack[ call_stack_index++ ] = "virtual_machine_line_of_user_input" ;
+
+    while( memory[ call_stack[ call_stack_index ] ++call_stack[ call_stack_index "subroutine_index" ] ] = split_line[ ++call_stack[ call_stack_index "subroutine_index" ]]){
     
     }
 
-    call_stack[ call_stack_index "subroutine_index" ]=1 ; 
+    call_stack[ call_stack_index "subroutine_index" ] = 1 ; 
 
     }
 
 }
+
 BEGIN{
 
-last_namespace = "virtual_machine" ;
-current_namespace = last_namespace ;
+	last_namespace = "virtual_machine" ;
+
+	current_namespace = last_namespace ;
 
 while( 1 ){
-
 
        operator = next_operation_code( ) ;
 
    if( operator == "define" ){
 
-       operand_a =next_operation_code( ) ;
+       operand_a = next_operation_code( ) ;
 
-        memory[ "defined_word" current_namespace operand_a ]++ ;
+       operand_b = next_operation_code( ) ;
+
+        memory[ "defined_word" operand_a operand_b ] = operand_b ;
 
 
-    	 while( ( memory[ "defined_word" current_namespace operand_a ++operator ] = next_operation_code( ) ) != "define" ){
+    	 while( ( memory[ "defined_word" operand_a operand_a ++operator ] = next_operation_code( ) ) != "define" ){
 
 	 }
-
 
     }
 
     else if( operator == "namespace" ){
 
-
     	last_namespace= current_namespace ;
 
        	current_namespace = next_operation_code( ) ;
 
-	
-
 	}
     
-
     else{
 
+    operator_name_in_current_namespace = "defined_word" current_namespace operator
 
-    operator_name_in_current_namespace="defined_word" current_namespace operator
-
-
-    operator_namespace = memory[ operator_identity_in_current_namespace  ] ;
+    operator_namespace = memory[ operator_name_in_current_namespace  ] ;
 
       if( operator_namespace ){ #check to see if operator is defined. if it has a  namespace it is defined
 
-
 	         call_stack[ ++call_stack_index "subroutine_index" ]++ ;
 
-		 call_stack[ call_stack_index ] = operator_identity_in_current_namespace ;
+		 call_stack[ call_stack_index ] = operator_name_in_current_namspace ;
+
+		 call_stack[ call_stack_index "namespace" ] = operator_namespace ;
 
 		 }
-    
-
-
 
     else if( operator_namespace == "virtual_machine" || !current_namespace ){
-
-
-
 	
 	operand_a = next_operation_code( ) ;
 	        
 	operand_b = next_operation_code( ) ;
     
         operand_c = next_operation_code( ) ;
-
-
-
-
 
     if( operator == "add" ){
 	
