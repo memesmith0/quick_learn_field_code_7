@@ -62,6 +62,8 @@ awk '
 function next_operation_code( ){
 
 while(1){
+
+	
     
     while( call_stack_index  ){
             
@@ -98,37 +100,75 @@ while(1){
 }
 BEGIN{
 
+last_namespace = "virtual_machine" ;
+current_namespace = last_namespace ;
+
 while( 1 ){
 
 
+       operator = next_operation_code( ) ;
 
-    operator = next_operation_code( ) ;
+   if( operator == "define" ){
 
-    operand_a = next_operation_code( ) ;
-    
-    operand_b = next_operation_code( ) ;
-    
-    operand_c = next_operation_code( ) ;
-    
+       operand_a =next_operation_code( ) ;
+
+        memory[ "defined_word" current_namespace operand_a ]++ ;
 
 
+    	 while( ( memory[ "defined_word" current_namespace operand_a ++operator ] = next_operation_code( ) ) != "define" ){
 
-    namespace = memory[ "defined_word" operator ] ;
-
-
-     if( namespace == "virtual_machine" || !namespace ){
+	 }
 
 
+    }
+
+    else if( operator == "namespace" ){
 
 
+    	last_namespace= current_namespace ;
 
+       	current_namespace = next_operation_code( ) ;
 
-    if( operator == "namespace" ){
-
-    	namespace = operand_a ;
+	
 
 	}
     
+
+    else{
+
+
+    operator_name_in_current_namespace="defined_word" current_namespace operator
+
+
+    operator_namespace = memory[ operator_identity_in_current_namespace  ] ;
+
+      if( operator_namespace ){ #check to see if operator is defined. if it has a  namespace it is defined
+
+
+	         call_stack[ ++call_stack_index "subroutine_index" ]++ ;
+
+		 call_stack[ call_stack_index ] = operator_identity_in_current_namespace ;
+
+		 }
+    
+
+
+
+    else if( operator_namespace == "virtual_machine" || !current_namespace ){
+
+
+
+	
+	operand_a = next_operation_code( ) ;
+	        
+	operand_b = next_operation_code( ) ;
+    
+        operand_c = next_operation_code( ) ;
+
+
+
+
+
     if( operator == "add" ){
 	
 	memory[ operand_a ] = memory[ operand_b ] + memory[ operand_c ] ;
@@ -136,7 +176,7 @@ while( 1 ){
     }
 
     else if(operator== "sub" ){
-	
+
 	memory[ operand_a ] = memory[ operand_b ] - memory[ operand_c ] ;
 
     }
@@ -226,18 +266,6 @@ while( 1 ){
 
     }
 
-    else if( operator == "define" ){
-
-        memory[ "defined_word" operand_a ]= operand_b ;
-
-
-
-    	 while( ( memory[ "defined_word" operand_a ++operator ] = next_operation_code( ) ) != "define" ){
-
-	 }
-
-
-    }
 
 
     else if (operator == "push"){
@@ -253,33 +281,6 @@ while( 1 ){
 
     }
 
-
-    else if( operator == "forth" ){
-
-    	 
-	 #a name of a list of words is in operator_a, does not care if it is forth or vm words
-	 #push operator_a onto the forth call stack
-	 forth_call_stack[++forth_call_stack_index]=operator_a;
-
-	 #while we still have things on the forth call stack
-
-	 while( operator_a = forth_call_stack[forth_call_stack_index forth_call_stabck[forth_call_stack_index]]
-
-	 #we walk through the list of words. if they are defined as forth words, push them onto the forth_call_stack
-	 #if they are not defined as forth words, they are vm functions, and are run
-
-	     forth_call_stack_index++ ;
-
-	         while( forth_call_stack[ forth_call_stack_index ++forth_call_stack[ forth_call_stack_index "subroutine_index" ] ]=split_line[ ++forth_call_stack[ forth_call_stack_index "subroutine_index" ]]){
-    
-    }
-
-    forth_call_stack[ forth_call_stack_index "subroutine_index" ]=1 ; 
-
-
-
-
-    }
 
 
       else if( operator == "(" ){
@@ -299,50 +300,32 @@ while( 1 ){
 
       else if( operator == "exit" ){
 
-      exit ;
+            exit ;
 
 
       }
 
+      }
+
+
       else{
 
 
-    	   if( memory[ "defined_word" operator ] ){
-
-
-	         call_stack[ ++call_stack_index "subroutine_index" ]++ ;
-
-		 call_stack[ call_stack_index ] = "defined_word" operator ;
-
-		 }
-    
-
-	    else{
 
 	    	    forth_stack[ ++forth_stack_index ] = operator;
 
+
+
 		    }
 
-	 
-      }
-      else{
-
-      	         call_stack[ ++call_stack_index "subroutine_index" ]++ ;
-
-		 call_stack[ call_stack_index ] = "defined_word" operator namespace ;
-
-		 }
-    
-	 
-      }
-
-
-
-
-
+namespace=last_namespace   
+}
 
 }
-    
+
+
+
+
 }
 
 ' ;
