@@ -63,7 +63,7 @@ function next_operation_code( ){
 
 while(1){
     
-    while( call_stack_index ] ){
+    while( call_stack_index  ){
             
 	    if( next_operation=call_stack[ call_stack_index call_stack[ call_stack_index "subroutine_index" ]++ ] ){
 
@@ -98,7 +98,36 @@ while(1){
 }
 BEGIN{
 
-while( operator != "exit" ){
+while( 1 ){
+
+
+
+    operator = next_operation_code( ) ;
+
+    operand_a = next_operation_code( ) ;
+    
+    operand_b = next_operation_code( ) ;
+    
+    operand_c = next_operation_code( ) ;
+    
+
+
+
+    namespace = memory[ "defined_word" operator ] ;
+
+
+     if( namespace == "virtual_machine" || !namespace ){
+
+
+
+
+
+
+    if( operator == "namespace" ){
+
+    	namespace = operand_a ;
+
+	}
     
     if( operator == "add" ){
 	
@@ -199,7 +228,9 @@ while( operator != "exit" ){
 
     else if( operator == "define" ){
 
-        memory[ "defined_word" operand_a ]++
+        memory[ "defined_word" operand_a ]= operand_b ;
+
+
 
     	 while( ( memory[ "defined_word" operand_a ++operator ] = next_operation_code( ) ) != "define" ){
 
@@ -266,10 +297,17 @@ while( operator != "exit" ){
 
       }
 
+      else if( operator == "exit" ){
+
+      exit ;
+
+
+      }
+
       else{
 
 
-    	   if( memory[ "defined_word" operator ]){
+    	   if( memory[ "defined_word" operator ] ){
 
 
 	         call_stack[ ++call_stack_index "subroutine_index" ]++ ;
@@ -287,18 +325,20 @@ while( operator != "exit" ){
 
 	 
       }
+      else{
 
+      	         call_stack[ ++call_stack_index "subroutine_index" ]++ ;
 
+		 call_stack[ call_stack_index ] = "defined_word" operator namespace ;
 
-
-    operator = next_operation_code( ) ;
-
-    operand_a = next_operation_code( ) ;
+		 }
     
-    operand_b = next_operation_code( ) ;
-    
-    operand_c = next_operation_code( ) ;
-    
+	 
+      }
+
+
+
+
 
 
 }
