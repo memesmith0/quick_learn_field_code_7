@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-#john morris beck 2025 - gplv2 - see gnu.org for license - https://github.com/memesmith0 - https://thefastscrolls.neocities.org
+#john morris beck 2025 - gplv2 - see gnu.org for license - https://github.com/memesmith0
 #qlfc7.sh
 #quick_learn_field_code_7
 #this is a compiler for quick-learn-field-language version 7
